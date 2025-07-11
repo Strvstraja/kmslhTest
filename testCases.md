@@ -37,7 +37,7 @@ Submit a contact form with missing mandatory fields to make sure the validation 
 6. Submit the form
 
 #### Expected Result:
-The form should not be submitted and the user should see a validation error message under the Name field stating "Please complete this required field.".
+The form should not be submitted and the name field should be in focus.
 
 
 ### Test Case 4: Validate that navigation between major site sections works as expected
