@@ -36,6 +36,8 @@ async fillMessage(message) {
 async submitForm() {
     await this.page.getByRole('button', { name: 'Contact us' }).click();
 }
-
+async getHeroText() {
+    return this.page.getByRole('heading', { name: 'Take your company knowledge' });    
+}
 }
 module.exports = { ContactUsPage };

@@ -12,6 +12,10 @@ class HomePage {
       await this.page.getByRole('navigation').getByRole('link', { name: 'About' }).click();
       await this.page.getByRole('banner').getByRole('link').filter({ hasText: 'Contact us' }).click();
     }
+    async navigateToCallCenter() {
+      await this.page.getByRole('navigation').getByRole('link', { name: 'Our Solutions' }).click();
+      await this.page.getByRole('banner').getByRole('link').filter({ hasText: 'Call center' }).click();
+    }
 }
 
 module.exports = { HomePage };
