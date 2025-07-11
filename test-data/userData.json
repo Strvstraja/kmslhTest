@@ -1,0 +1,11 @@
+{
+  "user1": {
+    "firstName": "Strahinja",
+    "lastName": "Becagol",
+    "email": "sb@sbecagol.com",
+    "phoneNumber": "+987456321",
+    "jobTitle": "QA",
+    "country": "Serbia",
+    "message": "message"
+  }
+}

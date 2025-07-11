@@ -1,0 +1,17 @@
+// homePage.js
+
+class HomePage {
+    constructor(page) {
+      this.page = page;
+    }
+  
+    async goto() {
+      await this.page.goto('https://kmslh.com/');
+    }
+    async navigateToContactUs() {
+      await this.page.getByRole('navigation').getByRole('link', { name: 'About' }).click();
+      await this.page.getByRole('banner').getByRole('link').filter({ hasText: 'Contact us' }).click();
+    }
+}
+
+module.exports = { HomePage };
