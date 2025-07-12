@@ -5,6 +5,7 @@ import { CallCenterPage } from '../pages/OurSolutions/callCenterPage';
 import { IntegrationsPage } from '../pages/integrationsPage';
 import { CaseStudiesPage } from '../pages/caseStudiesPage';
 import { AboutUsPage } from '../pages/About/aboutUsPage';
+import { BookADemoPage } from '../pages/bookADemoPage';
 import * as userData from '../test-data/userData.json';
 // Get test data from JSON file
 const testUser = userData.user1;
@@ -64,10 +65,41 @@ test('Validate that navigation between major site sections works as expected', a
   await expect(await caseStudiesPage.getHeroText()).toBeVisible();
   // Navigate to the About Us page via the link from the navigation menu
   await caseStudiesPage.navigateToAboutUs();
+  // Navigate to the Book a Demo page via the link from the navigation menu
   await expect(await aboutUsPage.getHeroText()).toBeVisible();
   // Navigate to the Contact Us page via the link from the navigation menu
   await aboutUsPage.navigateToContactUs();
   //Verify that the user is redirected to the Contact Us page
   await expect(await contactUsPage.getHeroText()).toBeVisible();
 
+});
+
+test('Validate "Book a Demo" Link Navigation', async ({ page }) => {
+  // Instantiate the HomePage, BookADemoPage classes
+  const homePage = new HomePage(page);
+  const bookADemoPage = new BookADemoPage(page);
+  const fieldGetters = [
+    bookADemoPage.getHeroText,
+    bookADemoPage.getNameField,
+    bookADemoPage.getLastNameField,
+    bookADemoPage.getProfessionalEmailField,
+    bookADemoPage.getPhoneNumberField,
+    bookADemoPage.getJobTitleField,
+    bookADemoPage.getCountryField,
+    bookADemoPage.getMessageField,
+  ];
+  
+
+  // Navigate to the home page
+  await homePage.goto();
+  // Navigate to the book a demo page via the link from the header
+  await homePage.navigateToBookADemo();
+  // Verify that the user is redirected to the Book a Demo page
+  for (const getField of fieldGetters) {
+    const field = await getField.call(bookADemoPage); // binds `this` correctly
+    await Promise.all([
+      expect(field).toBeVisible(),
+      expect(field).toBeEnabled()
+    ]);
+  }
 });
