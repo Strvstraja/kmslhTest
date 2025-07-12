@@ -103,3 +103,31 @@ test('Validate "Book a Demo" Link Navigation', async ({ page }) => {
     ]);
   }
 });
+
+
+test('Validate Default State of Accessibility Toggles', async ({ page }) => {
+  // Instantiate the HomePage, BookADemoPage classes
+  const homePage = new HomePage(page);
+  const fieldGetters = [
+    homePage.getIncreaseTextToggle,
+    homePage.getContrastToggle,
+    homePage.getDyslexiaFriendlyFontToggle,
+    homePage.getHighlightLinksToggle,
+  ];
+  // Navigate to the home page
+  await homePage.goto();
+  // Navigate to the accessibility widget
+  await homePage.clickTheAccessibilityWidget();
+
+  for (const getField of fieldGetters) {
+    const field = await getField.call(homePage); // binds `this` correctly
+    await Promise.all([
+      expect(field).not.toBeChecked(),
+     
+    ]);
+  }
+  
+  await homePage.toggleHighlightLinksToggle();
+  await expect(await homePage.getHighlightLinksToggle()).toBeChecked();
+
+});
